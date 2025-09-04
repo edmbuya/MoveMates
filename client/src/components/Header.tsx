@@ -46,13 +46,13 @@ export default function Header() {
             >
               Accommodations
             </button>
-            <button 
-              onClick={() => scrollToSection('about')} 
+            <Link 
+              href="/about" 
               className="text-foreground hover:text-primary transition-colors"
-              data-testid="button-nav-about"
+              data-testid="link-nav-about"
             >
               About
-            </button>
+            </Link>
             <button 
               onClick={() => scrollToSection('contact')} 
               className="text-foreground hover:text-primary transition-colors"
@@ -104,13 +104,14 @@ export default function Header() {
               >
                 Accommodations
               </button>
-              <button 
-                onClick={() => scrollToSection('about')} 
+              <Link 
+                href="/about" 
                 className="text-foreground hover:text-primary transition-colors text-left"
-                data-testid="button-mobile-nav-about"
+                data-testid="link-mobile-nav-about"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 About
-              </button>
+              </Link>
               <button 
                 onClick={() => scrollToSection('contact')} 
                 className="text-foreground hover:text-primary transition-colors text-left"

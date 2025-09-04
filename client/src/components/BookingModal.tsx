@@ -161,6 +161,45 @@ export default function BookingModal({ isOpen, onClose, service, serviceType }: 
             </div>
           </div>
 
+          {/* Service-specific options */}
+          {serviceType === "tour" && (
+            <div>
+              <Label htmlFor="destination">Destination</Label>
+              <Select>
+                <SelectTrigger data-testid="select-tour-destination">
+                  <SelectValue placeholder="Select destination" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="amboseli">Amboseli National Park</SelectItem>
+                  <SelectItem value="maasai-mara">Maasai Mara</SelectItem>
+                  <SelectItem value="mount-kenya">Mount Kenya</SelectItem>
+                  <SelectItem value="tsavo">Tsavo National Park</SelectItem>
+                  <SelectItem value="lake-nakuru">Lake Nakuru</SelectItem>
+                  <SelectItem value="samburu">Samburu National Reserve</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
+          {serviceType === "accommodation" && (
+            <div>
+              <Label htmlFor="apartmentType">Apartment Type</Label>
+              <Select>
+                <SelectTrigger data-testid="select-apartment-type">
+                  <SelectValue placeholder="Select apartment type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="studio">Studio</SelectItem>
+                  <SelectItem value="one-bedroom">One Bedroom</SelectItem>
+                  <SelectItem value="two-bedroom">Two Bedroom</SelectItem>
+                  <SelectItem value="three-bedroom">Three Bedroom</SelectItem>
+                  <SelectItem value="penthouse">Penthouse</SelectItem>
+                  <SelectItem value="villa">Villa</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="adults">Adults *</Label>

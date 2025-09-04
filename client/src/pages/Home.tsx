@@ -7,6 +7,7 @@ import AccommodationsSection from "@/components/AccommodationsSection";
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 import { MessageCircle } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -21,15 +22,22 @@ export default function Home() {
       <ContactSection />
       <Footer />
       
-      {/* Floating Chat Button */}
+      {/* Floating WhatsApp Button */}
       <div className="floating-chat">
-        <Button 
-          size="icon" 
-          className="w-14 h-14 rounded-full shadow-lg hover:scale-110 transition-all"
-          data-testid="button-chat"
+        <a 
+          href="https://wa.me/254112344722" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="block"
         >
-          <MessageCircle className="h-6 w-6" />
-        </Button>
+          <Button 
+            size="icon" 
+            className="w-14 h-14 rounded-full shadow-lg hover:scale-110 transition-all bg-green-500 hover:bg-green-600 text-white"
+            data-testid="button-whatsapp"
+          >
+            <SiWhatsapp className="h-6 w-6" />
+          </Button>
+        </a>
       </div>
     </div>
   );
