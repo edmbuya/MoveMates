@@ -1,6 +1,6 @@
 # GitHub Pages Deployment Guide
 
-This Move Mates website is now fully static and ready for GitHub Pages hosting!
+This Move Mates website is now a pure HTML/CSS/JavaScript static website ready for GitHub Pages hosting!
 
 ## Prerequisites
 - GitHub account
@@ -12,7 +12,7 @@ This Move Mates website is now fully static and ready for GitHub Pages hosting!
    ```bash
    git init
    git add .
-   git commit -m "Initial commit - Move Mates static website"
+   git commit -m "Initial commit - Move Mates HTML website"
    git branch -M main
    git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
    git push -u origin main
@@ -25,23 +25,34 @@ This Move Mates website is now fully static and ready for GitHub Pages hosting!
    - Under "Source", select "GitHub Actions"
 
 3. **Automatic Deployment:**
-   - The GitHub Action will automatically build and deploy your site
+   - The GitHub Action will automatically deploy your static files
    - Your site will be available at: `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME`
 
-## Manual Build (Optional)
-If you want to build locally:
-```bash
-vite build
+## Website Structure
 ```
-The static files will be in `dist/public/` directory.
+├── index.html          # Main homepage
+├── about.html          # About page
+├── privacy.html        # Privacy Policy
+├── terms.html          # Terms & Conditions
+├── cookies.html        # Cookie Policy
+├── styles.css          # All styling
+├── script.js           # All functionality
+└── .github/workflows/deploy.yml  # Auto-deployment
+```
 
 ## Features Working on GitHub Pages
-✅ Static website (no backend required)
-✅ Tour and accommodation browsing
-✅ Booking forms (saved to browser storage)  
-✅ Contact forms (saved to browser storage)
-✅ WhatsApp integration
-✅ Responsive design
-✅ All legal pages
+✅ Pure HTML/CSS/JavaScript (no build process required)
+✅ Fully responsive design with mobile navigation
+✅ Hero carousel with auto-advance
+✅ Tour filtering by category (Private, Group, Vehicle Hire)
+✅ Interactive booking forms with localStorage
+✅ Contact forms with localStorage
+✅ WhatsApp floating button (+254 112 344 722)
+✅ All legal pages (Privacy, Terms, Cookies)
+✅ Smooth scrolling navigation
+✅ Toast notifications for form submissions
 
-Your website will work perfectly on GitHub Pages since it's completely static with no database dependencies!
+## Local Testing
+Open `index.html` in any web browser - no server required!
+
+Your website will work perfectly on GitHub Pages since it's completely static with no dependencies!
