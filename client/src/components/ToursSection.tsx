@@ -1,24 +1,44 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Tour } from "@shared/schema";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import BookingModal from "./BookingModal";
+import toursData from "@/data/tours.json";
+
+type Tour = {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  duration: string;
+  price: string;
+  priceUnit: string;
+  location: string;
+  image: string;
+  features?: string[];
+  maxGuests?: number;
+  isActive: boolean;
+};
 
 export default function ToursSection() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
+  const [tours, setTours] = useState<Tour[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data: tours, isLoading } = useQuery<Tour[]>({
-    queryKey: ['/api/tours'],
-  });
+  useEffect(() => {
+    // Simulate loading delay for better UX
+    setTimeout(() => {
+      setTours(toursData as Tour[]);
+      setIsLoading(false);
+    }, 100);
+  }, []);
 
-  const filteredTours = tours?.filter(tour => {
+  const filteredTours = tours.filter(tour => {
     if (activeFilter === "all") return true;
     return tour.category === activeFilter;
-  }) || [];
+  });
 
   const handleBookNow = (tour: Tour) => {
     setSelectedTour(tour);

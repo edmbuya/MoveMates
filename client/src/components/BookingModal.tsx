@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -9,11 +8,50 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { insertBookingSchema, Tour, Accommodation } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
-type BookingFormData = z.infer<typeof insertBookingSchema>;
+const bookingSchema = z.object({
+  serviceType: z.string(),
+  serviceId: z.string(),
+  customerName: z.string().min(1, "Name is required"),
+  customerEmail: z.string().email("Invalid email address"),
+  customerPhone: z.string().optional(),
+  checkInDate: z.string().min(1, "Date is required"),
+  checkOutDate: z.string().optional(),
+  adults: z.number().min(1),
+  children: z.number().min(0),
+  specialRequests: z.string().optional(),
+});
+
+type Tour = {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  duration: string;
+  price: string;
+  priceUnit: string;
+  location: string;
+  image: string;
+  features?: string[];
+  maxGuests?: number;
+  isActive: boolean;
+};
+
+type Accommodation = {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  bedrooms: number;
+  price: string;
+  image: string;
+  features?: string[];
+  maxGuests: number;
+  isActive: boolean;
+};
+
+type BookingFormData = z.infer<typeof bookingSchema>;
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -27,7 +65,7 @@ export default function BookingModal({ isOpen, onClose, service, serviceType }: 
   const { toast } = useToast();
 
   const form = useForm<BookingFormData>({
-    resolver: zodResolver(insertBookingSchema),
+    resolver: zodResolver(bookingSchema),
     defaultValues: {
       serviceType,
       serviceId: service?.id || "",
@@ -42,11 +80,27 @@ export default function BookingModal({ isOpen, onClose, service, serviceType }: 
     },
   });
 
-  const bookingMutation = useMutation({
-    mutationFn: async (data: BookingFormData) => {
-      return await apiRequest("POST", "/api/bookings", data);
-    },
-    onSuccess: () => {
+  const onSubmit = (data: BookingFormData) => {
+    if (!service) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      // Save booking to localStorage
+      const booking = {
+        ...data,
+        serviceId: service.id,
+        serviceType,
+        id: Date.now().toString(),
+        status: "pending",
+        createdAt: new Date().toISOString(),
+        serviceName: service.title,
+      };
+
+      const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+      existingBookings.push(booking);
+      localStorage.setItem('bookings', JSON.stringify(existingBookings));
+
       toast({
         title: "Booking Submitted!",
         description: "Your booking request has been submitted successfully. We'll contact you soon to confirm.",
@@ -54,26 +108,14 @@ export default function BookingModal({ isOpen, onClose, service, serviceType }: 
       form.reset();
       setIsSubmitting(false);
       onClose();
-    },
-    onError: (error) => {
+    } catch (error) {
       toast({
         title: "Error",
         description: "Failed to submit booking. Please try again.",
         variant: "destructive",
       });
       setIsSubmitting(false);
-    },
-  });
-
-  const onSubmit = (data: BookingFormData) => {
-    if (!service) return;
-    
-    setIsSubmitting(true);
-    bookingMutation.mutate({
-      ...data,
-      serviceId: service.id,
-      serviceType,
-    });
+    }
   };
 
   if (!service) return null;

@@ -1,19 +1,37 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Accommodation } from "@shared/schema";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin } from "lucide-react";
 import BookingModal from "./BookingModal";
+import accommodationsData from "@/data/accommodations.json";
+
+type Accommodation = {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  bedrooms: number;
+  price: string;
+  image: string;
+  features?: string[];
+  maxGuests: number;
+  isActive: boolean;
+};
 
 export default function AccommodationsSection() {
   const [selectedAccommodation, setSelectedAccommodation] = useState<Accommodation | null>(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
+  const [accommodations, setAccommodations] = useState<Accommodation[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data: accommodations, isLoading } = useQuery<Accommodation[]>({
-    queryKey: ['/api/accommodations'],
-  });
+  useEffect(() => {
+    // Simulate loading delay for better UX
+    setTimeout(() => {
+      setAccommodations(accommodationsData as Accommodation[]);
+      setIsLoading(false);
+    }, 100);
+  }, []);
 
   const handleBookNow = (accommodation: Accommodation) => {
     setSelectedAccommodation(accommodation);
