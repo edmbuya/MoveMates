@@ -1,67 +1,50 @@
-# Move Mates - Safari Tours & Accommodations Platform
+# Overview
 
-## Overview
+Move Mates is a static tourism website for a Kenyan safari and accommodation booking company. The site showcases luxury safari tours, accommodations, and vehicle hire services with a focus on Kenya's wildlife destinations like Maasai Mara and Mount Kenya. The website serves as a marketing and information platform for potential customers to learn about services and contact the company for bookings.
 
-Move Mates is a full-stack web application for booking safari tours and luxury accommodations in Kenya. The platform showcases various tour packages (private tours, group tours, vehicle hire) and premium accommodations with detailed information, pricing, and booking capabilities. Built with a modern tech stack, it provides a seamless experience for travelers looking to explore Kenya's wildlife destinations like Maasai Mara, Amboseli National Park, and Mount Kenya.
-
-## User Preferences
+# User Preferences
 
 Preferred communication style: Simple, everyday language.
 
-## System Architecture
+# System Architecture
 
-### Frontend Architecture
-- **Framework**: React 18 with TypeScript for type safety and modern development
-- **Routing**: Wouter for lightweight client-side routing
-- **Styling**: Tailwind CSS with a warm beige color scheme designed for safari/tourism aesthetic
-- **UI Components**: Shadcn/ui component library built on Radix UI primitives for accessibility
-- **State Management**: TanStack Query (React Query) for server state management and caching
-- **Forms**: React Hook Form with Zod validation for type-safe form handling
-- **Build Tool**: Vite for fast development and optimized production builds
+## Frontend Architecture
+- **Static HTML Website**: Multi-page static site with traditional HTML structure
+- **Responsive Design**: Mobile-first CSS approach with hamburger navigation for smaller screens
+- **Client-Side JavaScript**: Pure vanilla JavaScript for interactive features without frameworks
+- **CSS Custom Properties**: CSS variables for consistent theming and color management
+- **Component-Based Styling**: Modular CSS organization with reusable classes
 
-### Backend Architecture
-- **Framework**: Express.js with TypeScript for API development
-- **Architecture Pattern**: RESTful API with clean separation of concerns
-- **Storage Layer**: Abstracted storage interface with in-memory implementation for development
-- **Middleware**: Custom logging middleware for API request tracking
-- **Error Handling**: Centralized error handling with proper HTTP status codes
-- **Development**: Hot module replacement and dev server integration with Vite
+## Content Management
+- **Data-Driven Content**: Tours and accommodations data stored in JavaScript objects within script.js
+- **Dynamic Rendering**: Client-side JavaScript populates tour listings and accommodation cards from data arrays
+- **Image Integration**: External image hosting via Unsplash CDN for high-quality photography
+- **SEO Optimization**: Proper meta tags, Open Graph tags, and semantic HTML structure
 
-### Database Design
-- **ORM**: Drizzle ORM with PostgreSQL dialect for type-safe database operations
-- **Schema**: Four main entities - Tours, Accommodations, Bookings, and Contact Messages
-- **Validation**: Drizzle-Zod integration for runtime type validation
-- **Migrations**: Automated database migrations with Drizzle Kit
+## Navigation and UX
+- **Single Page Application Feel**: Smooth scrolling navigation between sections on the main page
+- **Multi-Page Structure**: Separate pages for legal content (privacy, terms, cookies) and about information
+- **Interactive Elements**: Carousel functionality, mobile hamburger menu, and scroll-based navigation
+- **Progressive Enhancement**: Core functionality works without JavaScript, enhanced with interactive features
 
-### Key Features
-- **Tours Management**: Support for different tour categories (private, group, vehicle hire)
-- **Accommodations**: Luxury vacation rentals with detailed amenities and pricing
-- **Booking System**: Comprehensive booking flow with customer information capture
-- **Contact System**: Contact form for customer inquiries
-- **Responsive Design**: Mobile-first approach with desktop optimization
+## Design System
+- **Color Palette**: Earth-tone color scheme using CSS custom properties for safari/nature theme
+- **Typography**: System font stack for performance and consistency across devices
+- **Visual Hierarchy**: Clear content structure with proper heading levels and spacing
+- **Accessibility**: Semantic HTML structure and proper contrast ratios
 
-## External Dependencies
+# External Dependencies
 
-### Core Framework Dependencies
-- **React Ecosystem**: React 18, React DOM, React Hook Form, TanStack Query
-- **Styling & UI**: Tailwind CSS, Radix UI components, Lucide React icons
-- **Validation**: Zod for schema validation, Hookform Resolvers for form validation
-- **Utility Libraries**: clsx and tailwind-merge for conditional styling
+## CDN Resources
+- **Font Awesome 6.4.0**: Icon library for UI elements and visual enhancements
+- **Unsplash Images**: External image hosting for high-quality safari and tourism photography
 
-### Backend Dependencies
-- **Server**: Express.js with TypeScript support via tsx
-- **Database**: Neon Database Serverless driver for PostgreSQL
-- **ORM**: Drizzle ORM with Drizzle Kit for migrations
-- **Session Management**: connect-pg-simple for PostgreSQL session storage
-- **Utility Libraries**: date-fns for date manipulation, nanoid for ID generation
+## Third-Party Services
+- **Image CDN**: Unsplash API for optimized image delivery with query parameters for sizing and quality
+- **No Analytics**: Currently no tracking or analytics services integrated
+- **No Payment Processing**: Contact-based booking system without integrated payment gateways
 
-### Development Tools
-- **Build System**: Vite with React plugin and TypeScript support
-- **Code Quality**: TypeScript compiler for type checking
-- **Development**: esbuild for server bundling, PostCSS for CSS processing
-- **Replit Integration**: Specialized Replit plugins for development environment
-
-### Database Configuration
-- PostgreSQL database with connection via environment variable `DATABASE_URL`
-- Drizzle configured for PostgreSQL dialect with automatic migrations
-- Schema located in `shared/schema.ts` for code sharing between frontend and backend
+## Browser Compatibility
+- **Modern Browser Support**: CSS Grid, Flexbox, and CSS Custom Properties
+- **Responsive Design**: Viewport meta tags and responsive CSS for mobile compatibility
+- **Progressive Enhancement**: Core functionality without JavaScript dependencies
