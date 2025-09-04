@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Warm beige color scheme */
+  --background: hsl(42, 33%, 96%);
+  --foreground: hsl(35, 15%, 15%);
+  --card: hsl(42, 30%, 98%);
+  --card-foreground: hsl(35, 15%, 15%);
+  --popover: hsl(42, 30%, 98%);
+  --popover-foreground: hsl(35, 15%, 15%);
+  --primary: hsl(35, 35%, 65%);
+  --primary-foreground: hsl(35, 15%, 15%);
+  --secondary: hsl(40, 25%, 88%);
+  --secondary-foreground: hsl(35, 15%, 15%);
+  --muted: hsl(40, 20%, 90%);
+  --muted-foreground: hsl(35, 10%, 45%);
+  --accent: hsl(35, 30%, 75%);
+  --accent-foreground: hsl(35, 15%, 15%);
+  --destructive: hsl(0, 62%, 50%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --border: hsl(40, 15%, 85%);
+  --input: hsl(40, 15%, 85%);
+  --ring: hsl(35, 35%, 65%);
+  --chart-1: hsl(35, 35%, 65%);
+  --chart-2: hsl(159, 78%, 36%);
+  --chart-3: hsl(42, 93%, 56%);
+  --chart-4: hsl(147, 78%, 42%);
+  --chart-5: hsl(341, 75%, 51%);
+  --sidebar: hsl(42, 30%, 98%);
+  --sidebar-foreground: hsl(35, 15%, 15%);
+  --sidebar-primary: hsl(35, 35%, 65%);
+  --sidebar-primary-foreground: hsl(35, 15%, 15%);
+  --sidebar-accent: hsl(35, 30%, 75%);
+  --sidebar-accent-foreground: hsl(35, 15%, 15%);
+  --sidebar-border: hsl(40, 15%, 85%);
+  --sidebar-ring: hsl(35, 35%, 65%);
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 12px;
+  --shadow-2xs: 0px 2px 0px 0px hsl(35 35% 65% / 0.00);
+  --shadow-xs: 0px 2px 0px 0px hsl(35 35% 65% / 0.00);
+  --shadow-sm: 0px 2px 0px 0px hsl(35 35% 65% / 0.00), 0px 1px 2px -1px hsl(35 35% 65% / 0.00);
+  --shadow: 0px 2px 0px 0px hsl(35 35% 65% / 0.00), 0px 1px 2px -1px hsl(35 35% 65% / 0.00);
+  --shadow-md: 0px 2px 0px 0px hsl(35 35% 65% / 0.00), 0px 2px 4px -1px hsl(35 35% 65% / 0.00);
+  --shadow-lg: 0px 2px 0px 0px hsl(35 35% 65% / 0.00), 0px 4px 6px -1px hsl(35 35% 65% / 0.00);
+  --shadow-xl: 0px 2px 0px 0px hsl(35 35% 65% / 0.00), 0px 8px 10px -1px hsl(35 35% 65% / 0.00);
+  --shadow-2xl: 0px 2px 0px 0px hsl(35 35% 65% / 0.00);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  --background: hsl(35, 15%, 8%);
+  --foreground: hsl(42, 33%, 91%);
+  --card: hsl(35, 15%, 10%);
+  --card-foreground: hsl(42, 33%, 85%);
+  --popover: hsl(35, 15%, 8%);
+  --popover-foreground: hsl(42, 33%, 91%);
+  --primary: hsl(35, 35%, 65%);
+  --primary-foreground: hsl(35, 15%, 15%);
+  --secondary: hsl(35, 15%, 15%);
+  --secondary-foreground: hsl(42, 33%, 91%);
+  --muted: hsl(35, 15%, 12%);
+  --muted-foreground: hsl(35, 10%, 55%);
+  --accent: hsl(35, 25%, 20%);
+  --accent-foreground: hsl(35, 35%, 65%);
+  --destructive: hsl(0, 62%, 50%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --border: hsl(35, 15%, 18%);
+  --input: hsl(35, 15%, 18%);
+  --ring: hsl(35, 35%, 65%);
+  --sidebar: hsl(35, 15%, 10%);
+  --sidebar-foreground: hsl(42, 33%, 85%);
+  --sidebar-primary: hsl(35, 35%, 65%);
+  --sidebar-primary-foreground: hsl(35, 15%, 15%);
+  --sidebar-accent: hsl(35, 25%, 20%);
+  --sidebar-accent-foreground: hsl(35, 35%, 65%);
+  --sidebar-border: hsl(35, 15%, 18%);
+  --sidebar-ring: hsl(35, 35%, 65%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+.hero-overlay {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  display: none;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.carousel-slide.active {
+  display: block;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.carousel-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.carousel-indicator.active {
+  background: white;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tab-button.active {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.floating-chat {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
