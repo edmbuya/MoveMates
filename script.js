@@ -1,91 +1,4 @@
-// Data for tours and accommodations
-const toursData = [
-    {
-        "id": "1",
-        "title": "Maasai Mara Private Safari",
-        "description": "Exclusive wildlife experience with personal guide and luxury accommodation in Kenya's premier safari destination.",
-        "category": "private",
-        "duration": "3 Days",
-        "price": "1200.00",
-        "priceUnit": "person",
-        "location": "Maasai Mara",
-        "image": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-        "features": ["Private Guide", "Luxury Lodge", "Game Drives", "All Meals"],
-        "maxGuests": 6,
-        "isActive": true
-    },
-    {
-        "id": "2",
-        "title": "Mount Kenya Adventure",
-        "description": "Join fellow adventurers for an unforgettable trek up Africa's second highest mountain with expert guides.",
-        "category": "group",
-        "duration": "5 Days",
-        "price": "800.00",
-        "priceUnit": "person",
-        "location": "Mount Kenya",
-        "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-        "features": ["Expert Guides", "Camping Equipment", "Meals", "Permits"],
-        "maxGuests": 12,
-        "isActive": true
-    },
-    {
-        "id": "3",
-        "title": "Safari Vehicle + Driver",
-        "description": "Professional driver and 4WD vehicle for your custom safari adventure. Perfect for independent travelers.",
-        "category": "vehicle",
-        "duration": "Per Day",
-        "price": "150.00",
-        "priceUnit": "day",
-        "location": "Kenya",
-        "image": "https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-        "features": ["4WD Vehicle", "Professional Driver", "Fuel Included", "Insurance"],
-        "maxGuests": 7,
-        "isActive": true
-    },
-    {
-        "id": "4",
-        "title": "Amboseli Elephant Experience",
-        "description": "Get up close with magnificent elephants against the backdrop of Mount Kilimanjaro.",
-        "category": "private",
-        "duration": "2 Days",
-        "price": "900.00",
-        "priceUnit": "person",
-        "location": "Amboseli National Park",
-        "image": "https://images.unsplash.com/photo-1521651201144-634f700b36ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-        "features": ["Elephant Viewing", "Mountain Views", "Lodge Stay", "Photography"],
-        "maxGuests": 8,
-        "isActive": true
-    },
-    {
-        "id": "5",
-        "title": "Coastal Cultural Safari",
-        "description": "Explore the rich Swahili culture and pristine beaches of Kenya's stunning coastline.",
-        "category": "group",
-        "duration": "3 Days",
-        "price": "650.00",
-        "priceUnit": "person",
-        "location": "Kenyan Coast",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-        "features": ["Cultural Tours", "Beach Access", "Local Guides", "Traditional Meals"],
-        "maxGuests": 15,
-        "isActive": true
-    },
-    {
-        "id": "6",
-        "title": "Luxury SUV + Guide",
-        "description": "Premium vehicle with experienced local guide for comfortable exploration of Kenya's highlands.",
-        "category": "vehicle",
-        "duration": "Per Day",
-        "price": "200.00",
-        "priceUnit": "day",
-        "location": "Kenya Highlands",
-        "image": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-        "features": ["Luxury SUV", "Expert Guide", "Air Conditioning", "WiFi"],
-        "maxGuests": 5,
-        "isActive": true
-    }
-];
-
+// Data for accommodations
 const accommodationsData = [
     {
         "id": "1",
@@ -169,7 +82,6 @@ let currentServiceType = null;
 // DOM Elements
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
-const toursGrid = document.getElementById('tours-grid');
 const accommodationsGrid = document.getElementById('accommodations-grid');
 const bookingModal = document.getElementById('booking-modal');
 const bookingForm = document.getElementById('booking-form');
@@ -180,9 +92,7 @@ const toast = document.getElementById('toast');
 document.addEventListener('DOMContentLoaded', function() {
     initializeNavigation();
     initializeCarousel();
-    loadTours();
     loadAccommodations();
-    initializeFilters();
     initializeForms();
     initializeModal();
     setMinDate();
@@ -264,72 +174,6 @@ function currentSlideFunc(n) {
     indicators[currentSlide].classList.add('active');
 }
 
-// Tours Functions
-function loadTours() {
-    toursGrid.innerHTML = '';
-    toursData.forEach(tour => {
-        if (tour.isActive) {
-            const tourCard = createTourCard(tour);
-            toursGrid.appendChild(tourCard);
-        }
-    });
-}
-
-function createTourCard(tour) {
-    const card = document.createElement('div');
-    card.className = 'tour-card';
-    card.setAttribute('data-category', tour.category);
-    
-    card.innerHTML = `
-        <img src="${tour.image}" alt="${tour.title}" class="card-image">
-        <div class="card-content">
-            <h3 class="card-title">${tour.title}</h3>
-            <p class="card-description">${tour.description}</p>
-            <div class="card-details">
-                <div class="card-price">$${tour.price}/${tour.priceUnit}</div>
-                <div class="card-meta">
-                    <span><i class="fas fa-clock"></i> ${tour.duration}</span>
-                    <span><i class="fas fa-map-marker-alt"></i> ${tour.location}</span>
-                </div>
-            </div>
-            <div class="card-features">
-                ${tour.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
-            </div>
-            <button class="book-btn" onclick="openBookingModal('${tour.id}', 'tour')">Book Now</button>
-        </div>
-    `;
-    
-    return card;
-}
-
-function initializeFilters() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            button.classList.add('active');
-            
-            const category = button.getAttribute('data-category');
-            filterTours(category);
-        });
-    });
-}
-
-function filterTours(category) {
-    const tourCards = document.querySelectorAll('.tour-card');
-    
-    tourCards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-category') === category) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-}
-
 // Accommodations Functions
 function loadAccommodations() {
     accommodationsGrid.innerHTML = '';
@@ -384,9 +228,7 @@ function initializeModal() {
 }
 
 function openBookingModal(serviceId, serviceType) {
-    const service = serviceType === 'tour' 
-        ? toursData.find(tour => tour.id === serviceId)
-        : accommodationsData.find(acc => acc.id === serviceId);
+    const service = accommodationsData.find(acc => acc.id === serviceId);
     
     if (!service) return;
     
@@ -400,25 +242,14 @@ function openBookingModal(serviceId, serviceType) {
     const bookingOption = document.getElementById('booking-option');
     bookingOption.innerHTML = '';
     
-    if (serviceType === 'tour') {
-        // For tours, show destinations or tour types
-        const destinations = ['Maasai Mara', 'Mount Kenya', 'Amboseli', 'Tsavo', 'Lake Nakuru'];
-        destinations.forEach(destination => {
-            const option = document.createElement('option');
-            option.value = destination;
-            option.textContent = destination;
-            bookingOption.appendChild(option);
-        });
-    } else {
-        // For accommodations, show apartment types
-        const apartmentTypes = ['Standard Room', 'Deluxe Suite', 'Presidential Suite', 'Family Room'];
-        apartmentTypes.forEach(type => {
-            const option = document.createElement('option');
-            option.value = type;
-            option.textContent = type;
-            bookingOption.appendChild(option);
-        });
-    }
+    // For accommodations, show apartment types
+    const apartmentTypes = ['Standard Room', 'Deluxe Suite', 'Presidential Suite', 'Family Room'];
+    apartmentTypes.forEach(type => {
+        const option = document.createElement('option');
+        option.value = type;
+        option.textContent = type;
+        bookingOption.appendChild(option);
+    });
     
     // Show modal
     document.getElementById('booking-modal').style.display = 'block';
